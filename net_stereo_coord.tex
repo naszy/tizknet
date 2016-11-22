@@ -1,0 +1,89 @@
+\input{nets/tikz_net_general.tex}
+
+
+\begin{tikzpicture}[scale=0.089,every node/.style={scale=.67}]
+	\layerbox at (1,0) 
+			  size (24,32,1) 
+			  params (,,4) 
+			  label (2RGB \\ $240\times 320\times 4$\\$240\times 320\times 4$);
+	\layerbox at (-1,0) 
+			  size (24,32,1) 
+			  params (240,320,4)
+			  label ();
+			  
+	\subbox at (-3,10) size (5,5,1) params (5,5,4) dist (15);
+	\subbox at (-1,10) size (5,5,1) params (,,) dist (13);
+	
+	%Conv1
+	\layerbox at (15,0) 
+			  size (23,31,4) 
+			  params (236,316,16) 
+			  label (Conv1 \\ $16@236 \times 316$ \\ stride: 2);
+			  
+	\subbox at (12,22) size (3,3,4) params (2,2,16) dist (11);
+	%Pool1
+	\layerbox at (30,10) 
+			  size (12,15,4) 
+			  params (118,158,16) 
+			  label (Pool1 \\ $16@118 \times 158$);
+			  
+	\subbox at (29,16) size (3,3,4) params (2,2,16) dist (9);
+	%Conv2
+	\layerbox at (45,10) 
+			  size (12,15,8) 
+			  params (116,156,32) 
+			  label (Conv2 \\ $32@116 \times 156$);
+			  
+	\subbox at (44,17) size (3,3,8) params (2,2,32) dist (9);
+    %Pool2
+	\layerbox at (62,12) 
+			  size (9,11,8) 
+			  params (58,78,32) 
+			  label (Pool2 \\ $32@58 \times 78$);
+			  
+	\subbox at (61,17) size (3,3,8) params (2,2,32) dist (9);
+	
+	%Conv3
+	\layerbox at (80,12) 
+			  size (9,10,8) 
+			  params (56,76,32) 
+			  label (Conv3 \\ $32@116 \times 156$);
+			  
+	\subbox at (79,16) size (3,3,8) params (2,2,32) dist (9);
+    %Pool3
+	\layerbox at (97,14) 
+			  size (6,7,8) 
+			  params (28,38,32) 
+			  label (Pool3 \\ $32@28 \times 38$);
+			  
+	%\subbox at (61,17) size (3,3,8) params (2,2,16) dist (5);
+
+	\draw (110,17) node[align=center]{$\xrightarrow[P=0.5]{\text{dropout}}$};
+	
+	\layerbox at (115,1) 
+			  size (30,0,1) 
+			  params (,,) 
+			  label (FC1 \\ $@2048$);
+	
+	\draw (121,17.8) node{$\xrightarrow{\text{ReLU}}$};
+	
+	\layerbox at (126,10) 
+			  size (15,0,1) 
+			  params (,,) 
+			  label (FC2 \\ $@1024$);
+	
+	\draw (131,17.8) node{$\xrightarrow{\text{ReLU}}$};
+	
+	\layerbox at (135,13) 
+			  size (8,0,1) 
+			  params (,,) 
+			  label (FC3 \\ $@128$);
+			  
+  	\draw (140,17.8) node{$\xrightarrow{\text{ReLU}}$};
+			  
+	\layerbox at (144,14.5) 
+			  size (5,0,1) 
+			  params (,,) 
+			  label (OUT \\ $@3$);
+    
+\end{tikzpicture}

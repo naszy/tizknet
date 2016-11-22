@@ -1,0 +1,25 @@
+
+\usetikzlibrary{calc}
+
+\def\layerbox at (#1,#2) size (#3,#4,#5) params (#6,#7,#8) label (#9){
+ \draw[thick] (#1,#2) rectangle ++(#5,#3);
+ \draw[thick] (#1,#2) -- node[anchor=north]{\footnotesize #8} ++(#5,0);
+ \draw[thick] (#1,#2) -- node[anchor=east]{\footnotesize #7} ++(-#4/4 , #4/3) -- node[anchor=east]{\footnotesize #6} ++ (0,#3) -- ++(#4/4,-#4/3);
+ \draw[thick] (#1-#4/4 ,#2+#3+#4/3) --  ++ (#5,0) -- ++(#4/4,-#4/3);
+ \draw (#1+#5/2-#4/4,#2+#3+#4/3) node[align=center,anchor=south]{#9}
+}
+
+\def\subbox at (#1,#2) size (#3,#4,#5) params (#6,#7,#8) dist (#9){
+ \draw (#1,#2) rectangle ++(#5,#3);
+ \draw (#1,#2) -- node[anchor=north]{\footnotesize #8} ++(#5,0);
+ \draw (#1,#2) -- node[anchor=east]{\footnotesize #7} ++(-#4/4 , #4/3) -- node[anchor=east]{\footnotesize #6} ++ (0,#3) -- ++(#4/4,-#4/3);
+ \draw (#1-#4/4 ,#2+#3+#4/3) --  ++ (#5,0) -- ++(#4/4,-#4/3);
+
+ \draw[gray] (#1+#5,#2) -- ++(#9,#3/2+#4/6);
+ \draw[gray] (#1+#5,#2+#3) -- ++(#9,-#3/2+#4/6);
+ \draw[gray] (#1+#5,#2+#4/3) -- ++(#9,#3/2-#4/3+#4/6);
+ \draw[gray] (#1+#5-#4/4,#2+#3+#4/3) -- ++(#9+#4/4,-#3/2-#4/3+#4/6);
+ 
+ 
+}
+  
