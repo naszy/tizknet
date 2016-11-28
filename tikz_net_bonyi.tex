@@ -1,0 +1,65 @@
+\input{tikz_net_general.tex}
+
+\begin{tikzpicture}[scale=0.09,every node/.style={scale=.7}]
+
+
+	\layerbox at (0,0) 
+			  size (24,32,1) 
+			  params (240,320,4) 
+			  label (RGBD \\ $240\times 320\times 4$);
+			  
+	\subbox at (-3,10) size (5,5,1) params (5,5,4) dist (15);
+	%Conv1
+	\layerbox at (15,0) 
+			  size (23,31,4) 
+			  params (236,316,16) 
+			  label (Conv1 \\ $16@236 \times 316$ \\ stride: 2);
+			  
+	\subbox at (13,17) size (5,5,4) params (5,5,16) dist (5);
+	\draw (28,29) node[align=center] {Conv2-5\\32@nbhd:5\vspace{7em}\\$\cdots$};
+	%Pool1
+	
+	\layerbox at (45,3) 
+			  size (20,28,8) 
+			  params (220,300,32) 
+			  label (Conv6 \\ $32@220 \times 300$);
+			  
+	\subbox at (44,17) size (3,3,8) params (2,2,32) dist (5);
+    
+    \draw (63,29) node[align=center] {Conv7-11\\32@nbhd:2\vspace{5em}\\$\cdots$};
+	
+	
+	%Conv3
+	\layerbox at (80,4) 
+			  size (18,26,8) 
+			  params (208,288,32) 
+			  label (Conv12 \\ $32@208 \times 288$);
+			  
+	\subbox at (79,16) size (3,3,8) params (2,2,32) dist (9);
+    %Pool1
+	\layerbox at (97,10)
+			  size (9,13,8) 
+			  params (104,144,32) 
+			  label (Pool1 \\ $32@104 \times 144$);
+			  
+	%\subbox at (61,17) size (3,3,8) params (2,2,16) dist (5);
+
+	\draw (110,17) node[align=center]{$\xrightarrow[P=0.5]{\text{dropout}}$};
+	
+	\layerbox at (115,10) 
+			  size (15,0,1) 
+			  params (,,) 
+			  label (FC1 \\ $@1024$);
+			  
+	\draw (121,17.8) node{$\xrightarrow{\text{ReLU}}$};
+	\draw (128,24.2) node[align=center]{FC2-4\\@1024\\ +ReLU\vspace{2em}\\$\cdots$};
+	\draw (134,17.8) node{$\xrightarrow{\text{ReLU}}$};
+	
+	\layerbox at (139,10) 
+			  size (15,0,1) 
+			  params (,,) 
+			  label (FC5 \\ $@1024$);
+	
+	\draw (144,17.8) node{$\xrightarrow{O_1}$};
+	
+	\end{tikzpicture}
