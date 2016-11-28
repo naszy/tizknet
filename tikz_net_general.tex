@@ -1,5 +1,13 @@
 
 \usetikzlibrary{calc}
+\usepackage{pgffor}
+\usepackage{pgfmath}
+
+\usepackage{xintexpr}
+\usepackage{textcomp}
+\usepackage{gensymb}
+ 
+
 
 \def\layerbox at (#1,#2) size (#3,#4,#5) params (#6,#7,#8) label (#9){
  \draw[thick] (#1,#2) rectangle ++(#5,#3);
